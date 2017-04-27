@@ -1,6 +1,6 @@
 from __future__ import print_function
 import sys
-import Process
+from Process import *
 
 def initData():
 	data = []
@@ -31,8 +31,11 @@ def parseFile(filename):
 		if(num == 0):
 			num =temp[0] 	
 		else:
-			print(temp)
-			
+			arrivals = temp[2:]
+			for x in range(len(arrivals)):
+				arrivals[x] = arrivals[x].split("/")
+			temp = Process(temp[0], temp[1], arrivals)
+			process.append(temp)
 
 	return [process, num]
 	
@@ -40,14 +43,12 @@ def parseFile(filename):
 
 if __name__ == "__main__":
 
+	#function that starts 256 frames of data
 	data = initData()
-	#printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
 	processes = temp[0]
 	numProcess = temp[1]
-	print(processes)
-	print(numProcess)
 	
 		
 	
