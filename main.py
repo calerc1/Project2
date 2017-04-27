@@ -1,5 +1,0 @@
-hello = "heh"
-
-print hello
-
-
