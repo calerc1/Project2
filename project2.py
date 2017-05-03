@@ -20,22 +20,24 @@ def printData(data):
 	print ("="*32)
 
 ''' @param name of input file
-	@return a list of objects type Process
+	@return a
 '''
-
 def parseFile(filename):
 	process = []
 	num = 0
 	for line in open(fileName, "r"):
 		temp = (line.strip()).split(" ")
 		if(num == 0):
-			num =temp[0] 	
+			continue
 		else:
 			arrivals = temp[2:]
 			for x in range(len(arrivals)):
 				arrivals[x] = arrivals[x].split("/")
+				arrivals[x][0] = int(arrivals[x][0])
+				arrivals[x][1] = int(arrivals[x][1])
 			temp = Process(temp[0], temp[1], arrivals)
 			process.append(temp)
+			#print(temp)
 
 	return [process, num]
 	
@@ -43,7 +45,8 @@ def parseFile(filename):
 
 if __name__ == "__main__":
 
-	#function that starts 256 frames of data
+	#function that starts 256 frames of datat log
+
 	data = initData()
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
