@@ -12,8 +12,7 @@ def initData():
 @return a list of objects type Process
 '''
 def printData(data):
-	data = [ ['A', 0, 45], ['.', 46, 255] ]
-	print(data)
+	data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 78], ['.', 78, 256] ]
 	height  = 8
 	length = 32
 	print ( "=" * 32 )
@@ -24,26 +23,16 @@ def printData(data):
 	nl_count = 0
 	start = 0
         for element in data:
-		#print (element[0])
-		#for i in range(height*length):
 		count = 0
-		while (count < (element[2] - element[1])): #and loc < height * length:
-			if( (loc-1)%32 == 0 and loc != 0):
+		while (count < (element[2] - element[1])):
+			if( (loc)%32 == 0 and loc != 0):
 				s += "\n"
-				#print("newline!")
-				nl_count+=1
-				print( str(loc - start) ) 
-				start = loc
-			
-			s = s + str(loc)
-			s += element[0]
+		        s += element[0]
 			count  += 1
 			loc += 1
-			#print(count, loc, nl_count, element[0])
 			
-			print (element[0])
-		print(len(s))
 	print(s)
+	print ( "=" * 32 )
 
 ''' @param name of input file
 	@return a
@@ -70,6 +59,26 @@ def parseFile(filename):
 				process.append(new)
 				print(new)
         return [process, num]
+
+
+def nextFitc():
+	pass
+def bestFitc():
+	pass
+def worstFitc():
+	pass
+
+def contiguous():
+	pass
+
+def nextFitnc():
+	pass
+def bestFitnc():
+	pass
+def worstFitnc():
+	pass
+def non_contiguous():
+	pass
 
 
 if __name__ == "__main__":
