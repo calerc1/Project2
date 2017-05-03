@@ -4,20 +4,29 @@ import Process
 
 def initData():
 	data = []
-	for i in range(8):
-		line = []
-		for j in range(32):
-			line.append('.')
-			data.append(line)
+        data.append( ['.', 0, 255] )
 	return data
 
-def printData(data):
-	print ("="*32)
-	for i in range(8):
-		for j in range(32):
-			print(data[i][j], end ="")
-		print("")
-	print ("="*32)
+def printData( data ):
+        data = [ ['A', 0, 45], ['.', 46, 255] ]
+	print ( "=" * 32 )
+        current  = 0
+        line = 1
+        for element in data:
+                # final - initial point
+                len = element[2] - element[1]
+                while (current < element[2]):
+                        endLine = line * 32
+                        if ( (current + len) >= endLine ):
+                                print (element[0] * (endLine - current) ),
+                                current = endLine
+                                line += 1
+                        else:
+                                print (element[0] * (len - current) ),
+                                current = endLine
+                                
+                                
+	print ("=" * 32)
 
 ''' @param name of input file
 	@return a list of objects type Process
@@ -41,7 +50,8 @@ def parseFile(filename):
 if __name__ == "__main__":
 
 	data = initData()
-	#printData(data)
+        print ("Init Memory")
+	printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
 	processes = temp[0]
