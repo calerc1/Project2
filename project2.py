@@ -104,11 +104,5 @@ if __name__ == "__main__":
 	processes = temp[0]
 	numProcess = temp[1]
         processes.sort(key=lambda x: x.start, reverse=False)
-	
-        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 200] , ['.' , 200, 225], ['C', 225, 256 ] ]
-        print('before')
-        printData(data)
-	defragmentation(data)
-        print('after')
-        printData(data)
 
+        
