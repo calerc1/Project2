@@ -3,14 +3,14 @@ import sys
 from Process import *
 
 def initData():
-	data = []
-	for i in range(8):
-		line = []
-		for j in range(32):
-			line.append('.')
-			data.append(line)
-	return data
+        data = []
+        data.append( ['.', 0, 255] )
+        return data
 
+       
+''' @param name of input file
+@return a list of objects type Process
+'''
 def printData(data):
 	data = [ ['A', 0, 45], ['.', 46, 255] ]
 	print(data)
@@ -66,14 +66,11 @@ def parseFile(filename):
 				new = Process(temp[0], temp[1], x)
 				process.append(new)
 				print(new)
+        return [process, num]
 
-	return [process, num]
-	
-	
 
 if __name__ == "__main__":
 
-	#function that starts 256 frames of datat log
 
 	data = initData()
 	printData(data)
