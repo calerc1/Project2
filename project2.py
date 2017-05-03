@@ -52,6 +52,14 @@ def parseFile(filename):
 				process.append(new)
         return [process, num]
 
+def freeSpace(data):
+        space = 0
+        for element in data:
+                if element[0] == '.':
+                        space += (element[2] - element[1])
+        return space
+
+
 
 def nextFitc():
 	pass
@@ -77,6 +85,7 @@ if __name__ == "__main__":
 
         print('Init Data')
 	data = initData()
+        print(freeSpace(data))
 	printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
