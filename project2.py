@@ -4,15 +4,11 @@ from Process import *
 
 def initData():
         data = []
-        data.append( ['.', 0, 255] )
+        data.append( ['.', 0, 256] )
         return data
 
        
-''' @param name of input file
-@return a list of objects type Process
-'''
 def printData(data):
-	data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 78], ['.', 78, 256] ]
 	height  = 8
 	length = 32
 	print ( "=" * 32 )
@@ -33,9 +29,6 @@ def printData(data):
 	print(s)
 	print ( "=" * 32 )
 
-''' @param name of input file
-	@return a
-'''
 def parseFile(filename):
 	process = []
 	num = 0
@@ -51,18 +44,17 @@ def parseFile(filename):
 				arrivals[x] = arrivals[x].split("/")
 				arrivals[x][0] = int(arrivals[x][0])
 				arrivals[x][1] = int(arrivals[x][1])
+
 			# make object for each time
-			
 			for x in arrivals:
 				new = Process(temp[0], temp[1], x)
 				process.append(new)
-				print(new)
         return [process, num]
 
 
 if __name__ == "__main__":
 
-
+        print('Init Data')
 	data = initData()
 	printData(data)
 	fileName = sys.argv[1]
