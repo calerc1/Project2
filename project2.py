@@ -28,16 +28,21 @@ def parseFile(filename):
 	for line in open(fileName, "r"):
 		temp = (line.strip()).split(" ")
 		if(num == 0):
+			num  = temp
 			continue
 		else:
 			arrivals = temp[2:]
+			# clean input
 			for x in range(len(arrivals)):
 				arrivals[x] = arrivals[x].split("/")
 				arrivals[x][0] = int(arrivals[x][0])
 				arrivals[x][1] = int(arrivals[x][1])
-			temp = Process(temp[0], temp[1], arrivals)
-			process.append(temp)
-			#print(temp)
+			# make object for each time
+			
+			for x in arrivals:
+				new = Process(temp[0], temp[1], x)
+				process.append(new)
+				print(new)
 
 	return [process, num]
 	
@@ -48,6 +53,7 @@ if __name__ == "__main__":
 	#function that starts 256 frames of datat log
 
 	data = initData()
+	printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
 	processes = temp[0]
