@@ -80,6 +80,12 @@ def worstFitnc():
 def non_contiguous():
 	pass
 
+def defragmentation(data):
+        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
+
+        
+
+
 
 if __name__ == "__main__":
 
@@ -91,6 +97,9 @@ if __name__ == "__main__":
 	temp = parseFile(fileName)
 	processes = temp[0]
 	numProcess = temp[1]
+        processes.sort(key=lambda x: x.start, reverse=False)
+        for i in processes:
+                print(i)
 	
 		
 	
