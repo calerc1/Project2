@@ -12,12 +12,35 @@ def initData():
 	return data
 
 def printData(data):
-	print ("="*32)
-	for i in range(8):
-		for j in range(32):
-			print(data[i][j], end ="")
-		print("")
-	print ("="*32)
+	data = [ ['A', 0, 45], ['.', 46, 255] ]
+	print(data)
+	height  = 8
+	length = 32
+	print ( "=" * 32 )
+	s = ""
+        count  = 0
+	loc = 0
+        line = 1
+	nl_count = 0
+        for element in data:
+		#print (element[0])
+		#for i in range(height*length):
+		count = 0
+		while (count < (element[2] - element[1])) and loc < height * length:
+			if( (loc)%32 == 0 and loc != 0):
+				s += "\n"
+				#print("newline!")
+				nl_count+=1
+			else:
+				#s = s + str(loc)
+				s += element[0]
+				count  += 1
+			loc += 1
+			#print(count, loc, nl_count, element[0])
+			
+			print (element[0])
+		print(len(s))
+	print(s)
 
 ''' @param name of input file
 	@return a
