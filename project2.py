@@ -1,6 +1,9 @@
 from __future__ import print_function
 import sys
 from Process import *
+import sys
+sys.argv = "x p2-test-input01.txt".split(" ")
+
 
 def initData():
         data = []
@@ -59,17 +62,39 @@ def parseFile(filename):
 				process.append(new)
 				print(new)
         return [process, num]
-
-
-def nextFitc():
-	pass
+def find_dot_loc(data):
+	loc = []
+	for i in range(len(data)):
+		if data[i][0] == ".":
+			loc.append(i)
+	return loc
+def mergeDots(data):
+	newData = []
+	for i in range(1, len(data)):
+		if(data[i-1][0] == "." and data[i][0] == "."):
+			newData.append([".", data[i-1][1], data[i][2] ])
+			for j in range(i, len(data)):
+				newData.append(data[j])
+			mergeDots(newData)
+		else:
+			newData.append(data[i])
+	return newData
+def nextFitc(data, processes):
+	i = 0
+	while len(processes) > 0:  #''' and data != all '.'...? '''
+		if processes[0].start == i:
+			dots = find_dot_loc(data)
+		i+=1 
+		
 def bestFitc():
 	pass
 def worstFitc():
 	pass
 
-def contiguous():
-	pass
+def contiguous(data, processes):
+	nextFitc(data[:], processes[:])
+	bestFitc(data[:], processes[:])
+	worstFitc(data[:], processes[:])
 
 def nextFitnc():
 	pass
