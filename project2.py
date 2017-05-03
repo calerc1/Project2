@@ -17,9 +17,10 @@ def printData(data):
 	loc = 0
         line = 1
 	nl_count = 0
+	start = 0
         for element in data:
 		count = 0
-		while (count < (element[2] - element[1])) and loc < height * length:
+		while (count < (element[2] - element[1])):
 			if( (loc)%32 == 0 and loc != 0):
 				s += "\n"
 		        s += element[0]
@@ -50,6 +51,26 @@ def parseFile(filename):
 				new = Process(temp[0], temp[1], x)
 				process.append(new)
         return [process, num]
+
+
+def nextFitc():
+	pass
+def bestFitc():
+	pass
+def worstFitc():
+	pass
+
+def contiguous():
+	pass
+
+def nextFitnc():
+	pass
+def bestFitnc():
+	pass
+def worstFitnc():
+	pass
+def non_contiguous():
+	pass
 
 
 if __name__ == "__main__":
