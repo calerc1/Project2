@@ -81,11 +81,17 @@ def non_contiguous():
 	pass
 
 def defragmentation(data):
-        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
-
-        
-
-
+        for element in data:
+                if element[0] == '.':
+                        data.remove(element)
+        lastEnd = 0        
+        for element in data:
+                len = element[2] - element[1]
+                element[1] = lastEnd
+                element[2] = element[1] + len
+                lastEnd = element[2]
+        if ((lastEnd - 256) != 0):
+                data.append( [ '.' , lastEnd, 256] )
 
 if __name__ == "__main__":
 
@@ -98,9 +104,11 @@ if __name__ == "__main__":
 	processes = temp[0]
 	numProcess = temp[1]
         processes.sort(key=lambda x: x.start, reverse=False)
-        for i in processes:
-                print(i)
 	
-		
-	
+        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 200] , ['.' , 200, 225], ['C', 225, 256 ] ]
+        print('before')
+        printData(data)
+	defragmentation(data)
+        print('after')
+        printData(data)
 
