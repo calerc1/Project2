@@ -22,19 +22,22 @@ def printData(data):
 	loc = 0
         line = 1
 	nl_count = 0
+	start = 0
         for element in data:
 		#print (element[0])
 		#for i in range(height*length):
 		count = 0
-		while (count < (element[2] - element[1])) and loc < height * length:
-			if( (loc)%32 == 0 and loc != 0):
+		while (count < (element[2] - element[1])): #and loc < height * length:
+			if( (loc-1)%32 == 0 and loc != 0):
 				s += "\n"
 				#print("newline!")
 				nl_count+=1
-			else:
-				#s = s + str(loc)
-				s += element[0]
-				count  += 1
+				print( str(loc - start) ) 
+				start = loc
+			
+			s = s + str(loc)
+			s += element[0]
+			count  += 1
 			loc += 1
 			#print(count, loc, nl_count, element[0])
 			
