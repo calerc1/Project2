@@ -2,20 +2,20 @@ from __future__ import print_function
 import sys
 from Process import *
 import sys
-sys.argv = "x p2-test-input01.txt".split(" ")
+sys.argv = "x p2-test-input03.txt".split(" ")
+#p2-test-input01.txt
+#p2-test-input02.txt
+#p2-test-input03.txt
+
 
 
 def initData():
         data = []
-        data.append( ['.', 0, 255] )
+        data.append( ['.', 0, 256] )
         return data
 
        
-''' @param name of input file
-@return a list of objects type Process
-'''
 def printData(data):
-	data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 78], ['.', 78, 256] ]
 	height  = 8
 	length = 32
 	print ( "=" * 32 )
@@ -37,9 +37,6 @@ def printData(data):
 	print(s)
 	print ( "=" * 32 )
 
-''' @param name of input file
-	@return a
-'''
 def parseFile(filename):
 	process = []
 	num = 0
@@ -55,13 +52,13 @@ def parseFile(filename):
 				arrivals[x] = arrivals[x].split("/")
 				arrivals[x][0] = int(arrivals[x][0])
 				arrivals[x][1] = int(arrivals[x][1])
+
 			# make object for each time
-			
 			for x in arrivals:
 				new = Process(temp[0], temp[1], x)
 				process.append(new)
-				print(new)
         return [process, num]
+
 def find_dot_loc(data):
 	loc = []
 	for i in range(len(data)):
@@ -71,13 +68,13 @@ def find_dot_loc(data):
 def mergeDots(data):
 	newData = []
 	for i in range(1, len(data)):
-		if(data[i-1][0] == "." and data[i][0] == "."):
+		if(data[i-1][0] != "." and data[i][0] != "."):
+			newData.append(data[i])
+		else:
 			newData.append([".", data[i-1][1], data[i][2] ])
 			for j in range(i, len(data)):
 				newData.append(data[j])
 			mergeDots(newData)
-		else:
-			newData.append(data[i])
 	return newData
 def nextFitc(data, processes):
 	i = 0
@@ -86,6 +83,18 @@ def nextFitc(data, processes):
 			dots = find_dot_loc(data)
 		i+=1 
 		
+
+def freeSpace(data):
+        space = 0
+        for element in data:
+                if element[0] == '.':
+                        space += (element[2] - element[1])
+        return space
+
+
+
+def nextFitc():
+	pass
 def bestFitc():
 	pass
 def worstFitc():
@@ -105,17 +114,28 @@ def worstFitnc():
 def non_contiguous():
 	pass
 
+def defragmentation(data):
+        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
+
+        
 
 if __name__ == "__main__":
 
-
+        print('Init Data')
 	data = initData()
+        print(freeSpace(data))
 	printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
 	processes = temp[0]
 	numProcess = temp[1]
+        processes.sort(key=lambda x: x.start, reverse=False)
+        for i in processes:
+                print(i)
 	
 		
-	
+	data = [["A", 0, 45], [".", 45, 256] ]
+	printData(data)
+	data = mergeDots(data)
+	printData(data)
 
