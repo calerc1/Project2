@@ -77,6 +77,7 @@ def mergeDots(data):
 	
 	print(tempData)	
 	i = 0
+	end = len(data)
 	while i < len(tempData):
 		if(len(tempData) == 1 ):
 			if(tempData[0][1] != 0):
@@ -129,8 +130,8 @@ def non_contiguous():
 	pass
 
 def defragmentation(data):
-
         data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
+
         for element in data:
                 if element[0] == '.':
                         data.remove(element)
@@ -161,8 +162,10 @@ if __name__ == "__main__":
 	
 		
 	data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
+
 	printData(data)
 	print( "Go\n", mergeDots(data) )
 	printData(data)
+
 
         
