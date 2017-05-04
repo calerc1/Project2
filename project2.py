@@ -130,40 +130,27 @@ def contiguous(data, processes):
 def nextFitnc(data, processes):
         time = 0 
         inMemory = []
-        while( len(processes) > 0):
-                if(processes[0].start == time):
-                        
-                        print('heh')
-                        inMemory.append(processes[0])
-	            	length = processes[0].numMem
-			dots = find_dot_loc(data)
-			if(len(dots) > 0):
-				for x in dots:
-					dstart = data[x][1]
-					dend = data[x][2]
-					dlength = data[x][2] - data[x][1]
-					if dlength >= length:
-						data.insert(x, [processes[0].name, dstart, dstart + length] )
-						if length < dlength:
-							data.insert(x+1, [".", dstart + length, dend ])
-			else:
-				pass #unable to place process
-		time +=1
+        
+        while(processes > 0 and inMemory > 0):
+              #will check for arrivals add them to data and switch from process to inMem
+              checkReady(processes, data, inMemory)
 
+              checkDone(data, inMemory)
+
+              time +=1
                 
                 
-
-
-      
-
-
-
-
-
-
-
-
-
+def checkReady(processes, data, inMemory):
+        #
+        i = 0
+        end = 0 
+        while( i+1 != end):
+   			if( processes[i].start == time):
+   				inMemory.append(processes[i])
+   				processes.remove(i)
+   				end -= 1
+   			else:
+   				i += 1
 
 
 
@@ -204,29 +191,29 @@ def mergeEverything(data):
 
 
 if __name__ == "__main__":
-        print('Init Data')
+	print('Init Data')
 	data = initData()
 	printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
 	processes = temp[0]
 	numProcess = temp[1]
-        processes.sort(key=lambda x: x.start, reverse=False)
+	processes.sort(key=lambda x: x.start, reverse=False)
 
-        for i in processes:
-              print (i)
+    for i in processes:
+        print (i)
         '''
 	contiguous(data, processes)
 	'''
-        for i in processes:
-                print(i)
+    for i in processes:
+        print(i)
 	'''
 		
 	data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
         '''
 
 
-        non_contiguous(data, processes)
+    non_contiguous(data, processes)
 	'''data = [["A", 0, 45], [".", 45, 256] ]
 
 	printData(data)
@@ -260,3 +247,4 @@ if __name__ == "__main__":
         printData(data)
         '''
 
+S
