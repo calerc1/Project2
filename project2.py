@@ -66,15 +66,29 @@ def find_dot_loc(data):
 			loc.append(i)
 	return loc
 def mergeDots(data):
+	tempData = []
 	newData = []
-	for i in range(1, len(data)):
-		if(data[i-1][0] != "." and data[i][0] != "."):
-			newData.append(data[i])
+	for i in data:
+		if i[0] != ".":
+			tempData.append(i)
+	print(tempData)
+	if(len(tempData) == 0 ):
+		return initData()
+	
+	print(tempData)	
+	i = 0
+	while i < len(tempData):
+		if(len(tempData) == 1 ):
+			if(tempData[0][1] != 0):
+				tempData.insert(0, [".", 0, tempData[0][1]])
+			if(tempData[0][2] != 256):
+				tempData.append([".", tempData[0][2], 256 ])		
+		if(tempData[i - 1][2] != tempData[i][1]):
+			newData.append([ ".", tempData[i - 1][2], tempData[i][2] ] )
 		else:
-			newData.append([".", data[i-1][1], data[i][2] ])
-			for j in range(i, len(data)):
-				newData.append(data[j])
-			mergeDots(newData)
+			newData.append(tempData[i-1])
+	i+=1
+	
 	return newData
 def nextFitc(data, processes):
 	i = 0
@@ -115,11 +129,8 @@ def non_contiguous():
 	pass
 
 def defragmentation(data):
-<<<<<<< HEAD
-        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
 
-        
-=======
+        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
         for element in data:
                 if element[0] == '.':
                         data.remove(element)
@@ -131,7 +142,7 @@ def defragmentation(data):
                 lastEnd = element[2]
         if ((lastEnd - 256) != 0):
                 data.append( [ '.' , lastEnd, 256] )
->>>>>>> f739677ffa5297cd06a2d2835c1e4afb6306d866
+
 
 if __name__ == "__main__":
 
@@ -144,16 +155,14 @@ if __name__ == "__main__":
 	processes = temp[0]
 	numProcess = temp[1]
         processes.sort(key=lambda x: x.start, reverse=False)
-<<<<<<< HEAD
+
         for i in processes:
                 print(i)
 	
 		
-	data = [["A", 0, 45], [".", 45, 256] ]
+	data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
 	printData(data)
-	data = mergeDots(data)
+	print( "Go\n", mergeDots(data) )
 	printData(data)
-=======
->>>>>>> f739677ffa5297cd06a2d2835c1e4afb6306d866
 
         
