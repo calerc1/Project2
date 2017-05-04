@@ -67,13 +67,6 @@ def find_dot_loc(data):
 	return loc
 
 
-def nextFitc(data, processes):
-	i = 0
-	while len(processes) > 0:  #''' and data != all '.'...? '''
-		if processes[0].start == i:
-			dots = find_dot_loc(data)
-		i+=1 
-		
 
 def freeSpace(data):
         space = 0
@@ -114,14 +107,55 @@ def contiguous(data, processes):
 	bestFitc(data[:], processes[:])
 	worstFitc(data[:], processes[:])
 
-def nextFitnc():
-	pass
+
+
+
+def nextFitnc(data, processes):
+        time = 0 
+        inMemory = []
+        while( len(processes) > 0):
+                if(processes[0].start == time):
+                        
+                        print('heh')
+                        inMemory.append(processes[0])
+	            	length = processes[0].numMem
+			dots = find_dot_loc(data)
+			if(len(dots) > 0):
+				for x in dots:
+					dstart = data[x][1]
+					dend = data[x][2]
+					dlength = data[x][2] - data[x][1]
+					if dlength >= length:
+						data.insert(x, [processes[0].name, dstart, dstart + length] )
+						if length < dlength:
+							data.insert(x+1, [".", dstart + length, dend ])
+			else:
+				pass #unable to place process
+		time +=1
+
+                
+                
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
 def bestFitnc():
 	pass
 def worstFitnc():
 	pass
-def non_contiguous():
-	pass
+def non_contiguous(data, processes):
+	nextFitnc(data[:], processes[:])
 
 def defragmentation(data):
         data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
@@ -153,7 +187,6 @@ def mergeEverything(data):
 
 
 if __name__ == "__main__":
-
         print('Init Data')
 	data = initData()
 	printData(data)
@@ -163,14 +196,10 @@ if __name__ == "__main__":
 	numProcess = temp[1]
         processes.sort(key=lambda x: x.start, reverse=False)
 
-
         for i in processes:
-                print(i)
-	
-		
-	data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
+              print (i)
 
-
+        non_contiguous(data, processes)
 	'''data = [["A", 0, 45], [".", 45, 256] ]
 
 	printData(data)
