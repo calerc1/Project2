@@ -65,17 +65,19 @@ def find_dot_loc(data):
 		if data[i][0] == ".":
 			loc.append(i)
 	return loc
+
+
 def mergeDots(data):
-	newData = []
-	for i in range(1, len(data)):
-		if(data[i-1][0] != "." and data[i][0] != "."):
-			newData.append(data[i])
-		else:
-			newData.append([".", data[i-1][1], data[i][2] ])
-			for j in range(i, len(data)):
-				newData.append(data[j])
-			mergeDots(newData)
-	return newData
+        newData = []
+        for i in range(1, len(data)):
+                if(data[i-1][0] != "." and data[i][0] != "."):
+                        newData.append(data[i])
+                else:
+                        newData.append([".", data[i-1][1], data[i][2] ])
+                        for j in range(i, len(data)):
+                                newData.append(data[j])
+                                mergeDots(newData)
+                                return newData
 def nextFitc(data, processes):
 	i = 0
 	while len(processes) > 0:  #''' and data != all '.'...? '''
@@ -124,14 +126,26 @@ def defragmentation(data):
                 element[1] = lastEnd
                 element[2] = element[1] + len
                 lastEnd = element[2]
-        if ((lastEnd - 256) != 0):
-                data.append( [ '.' , lastEnd, 256] )
+        #if ((lastEnd - 256) != 0):
+                
+
+def mergeEverything(data):
+        i=0
+        end  = len(data)
+        while( (i+1 != end)  ):
+                if( data[i][0] == data[i+1][0]):
+                        data[i][2] = data[i+1][2]
+                        data.remove(data[i+1])
+                        end -= 1
+
+                else:
+                        i += 1
+
 
 if __name__ == "__main__":
 
         print('Init Data')
 	data = initData()
-        print(freeSpace(data))
 	printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
@@ -139,7 +153,24 @@ if __name__ == "__main__":
 	numProcess = temp[1]
         processes.sort(key=lambda x: x.start, reverse=False)
 
-	data = [["A", 0, 45], [".", 45, 256] ]
+	'''data = [["A", 0, 45], [".", 45, 256] ]
 	printData(data)
 	data = mergeDots(data)
 	printData(data)
+        '''
+
+        #mergeeverything test
+        '''
+        data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80], ['B',80, 256] ]
+        printData(data)
+        print (data)
+        mergeEverything(data)
+        printData(data)
+        '''
+        # freeSpace test
+        '''
+        print(freeSpace(data))
+        data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80], ['B',80, 256] ]
+        mergeEverything(data)
+        print(freeSpace(data))
+        '''
