@@ -78,28 +78,45 @@ def freeSpace(data):
 
 
 def nextFitc(data, processes):
+	print("Start nextfit")
+	printData(data)
+	for el in processes:
+		print(el)
 	i = 0
 	isempty = True
-	while len(processes > 0):
+	while len(processes) > 0  and i <= 100:
+		#printData(data)
+		#if Process leaves at time i
+		
+		#if Process arrives at time i
 		if(processes[0].start == i):
+			print("TRIGGERED", i, processes[0].numMem)
 			length = processes[0].numMem
 			dots = find_dot_loc(data)
+			print(dots)
 			if(len(dots) > 0):
 				for x in dots:
 					dstart = data[x][1]
 					dend = data[x][2]
 					dlength = data[x][2] - data[x][1]
+					print(dlength, length)
+					print (dlength > length)
 					if dlength >= length:
+						print("here")
 						data.insert(x, [processes[0].name, dstart, dstart + length] )
+						data.pop(x+1)
+						printData(data)
 						if length < dlength:
 							data.insert(x+1, [".", dstart + length, dend ])
+						printData(data)
 			else:
 				pass #unable to place process
 		i+=1
+	
 
-def bestFitc():
+def bestFitc(data, processes):
 	pass
-def worstFitc():
+def worstFitc(data, processes):
 	pass
 
 def contiguous(data, processes):
@@ -198,6 +215,16 @@ if __name__ == "__main__":
 
         for i in processes:
               print (i)
+        '''
+	contiguous(data, processes)
+	'''
+        for i in processes:
+                print(i)
+	'''
+		
+	data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
+        '''
+
 
         non_contiguous(data, processes)
 	'''data = [["A", 0, 45], [".", 45, 256] ]

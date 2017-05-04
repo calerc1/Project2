@@ -9,4 +9,4 @@ class Process:
                 self.stop = int(Data[1])
 	
 	def __str__(self):
-		return self.name + " " +   self.numMem + " " +  str(self.start) + " " + str(self.stop)
+		return self.name + " " +   str(self.numMem) + " " +  str(self.start) + " " + str(self.stop)
