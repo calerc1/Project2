@@ -65,32 +65,8 @@ def find_dot_loc(data):
 		if data[i][0] == ".":
 			loc.append(i)
 	return loc
-def mergeDots(data):
-	tempData = []
-	newData = []
-	for i in data:
-		if i[0] != ".":
-			tempData.append(i)
-	print(tempData)
-	if(len(tempData) == 0 ):
-		return initData()
-	
-	print(tempData)	
-	i = 0
-	end = len(data)
-	while i < len(tempData):
-		if(len(tempData) == 1 ):
-			if(tempData[0][1] != 0):
-				tempData.insert(0, [".", 0, tempData[0][1]])
-			if(tempData[0][2] != 256):
-				tempData.append([".", tempData[0][2], 256 ])		
-		if(tempData[i - 1][2] != tempData[i][1]):
-			newData.append([ ".", tempData[i - 1][2], tempData[i][2] ] )
-		else:
-			newData.append(tempData[i-1])
-	i+=1
-	
-	return newData
+
+
 def nextFitc(data, processes):
 	i = 0
 	while len(processes) > 0:  #''' and data != all '.'...? '''
@@ -160,14 +136,26 @@ def defragmentation(data):
                 element[2] = element[1] + len
                 lastEnd = element[2]
         if ((lastEnd - 256) != 0):
-                data.append( [ '.' , lastEnd, 256] )
+                data.append(['.', lastEnd, 256])
+                
+
+def mergeEverything(data):
+        i=0
+        end  = len(data)
+        while( (i+1 != end)  ):
+                if( data[i][0] == data[i+1][0]):
+                        data[i][2] = data[i+1][2]
+                        data.remove(data[i+1])
+                        end -= 1
+                else:
+                        i += 1
+
 
 
 if __name__ == "__main__":
 
         print('Init Data')
 	data = initData()
-        print(freeSpace(data))
 	printData(data)
 	fileName = sys.argv[1]
 	temp = parseFile(fileName)
@@ -175,15 +163,44 @@ if __name__ == "__main__":
 	numProcess = temp[1]
         processes.sort(key=lambda x: x.start, reverse=False)
 
+
         for i in processes:
                 print(i)
 	
 		
 	data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
 
+
+	'''data = [["A", 0, 45], [".", 45, 256] ]
+
 	printData(data)
 	print( "Go\n", mergeDots(data) )
 	printData(data)
+      '''
 
+        #mergeeverything test
+        '''
+        data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80], ['B',80, 256] ]
+        printData(data)
+        print (data)
+        mergeEverything(data)
+        printData(data)
+        '''
+        # freeSpace test
+        '''
+        print(freeSpace(data))
+        data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80], ['B',80, 256] ]
+        mergeEverything(data)
+        print(freeSpace(data))
+        '''
 
-        
+        #defragmentation test
+        '''
+        data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80], ['B',80, 256] ]
+        mergeEverything(data)
+
+        printData(data)
+        defragmentation(data)
+        printData(data)
+        '''
+
