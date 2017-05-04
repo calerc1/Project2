@@ -126,7 +126,8 @@ def defragmentation(data):
                 element[1] = lastEnd
                 element[2] = element[1] + len
                 lastEnd = element[2]
-        #if ((lastEnd - 256) != 0):
+        if ((lastEnd - 256) != 0):
+                data.append(['.', lastEnd, 256])
                 
 
 def mergeEverything(data):
@@ -137,7 +138,6 @@ def mergeEverything(data):
                         data[i][2] = data[i+1][2]
                         data.remove(data[i+1])
                         end -= 1
-
                 else:
                         i += 1
 
@@ -174,3 +174,14 @@ if __name__ == "__main__":
         mergeEverything(data)
         print(freeSpace(data))
         '''
+
+        #defragmentation test
+        '''
+        data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80], ['B',80, 256] ]
+        mergeEverything(data)
+
+        printData(data)
+        defragmentation(data)
+        printData(data)
+        '''
+
