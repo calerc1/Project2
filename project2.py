@@ -108,8 +108,26 @@ def freeSpace(data):
 
 
 
-def nextFitc():
-	pass
+def nextFitc(data, processes):
+	i = 0
+	isempty = True
+	while len(processes > 0):
+		if(processes[0].start == i):
+			length = processes[0].numMem
+			dots = find_dot_loc(data)
+			if(len(dots) > 0):
+				for x in dots:
+					dstart = data[x][1]
+					dend = data[x][2]
+					dlength = data[x][2] - data[x][1]
+					if dlength >= length:
+						data.insert(x, [processes[0].name, dstart, dstart + length] )
+						if length < dlength:
+							data.insert(x+1, [".", dstart + length, dend ])
+			else:
+				pass #unable to place process
+		i+=1
+
 def bestFitc():
 	pass
 def worstFitc():
