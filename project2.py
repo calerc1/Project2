@@ -115,11 +115,6 @@ def non_contiguous():
 	pass
 
 def defragmentation(data):
-<<<<<<< HEAD
-        data = [ ['A', 0, 45], ['.', 45, 64], ['B', 64, 256] ]
-
-        
-=======
         for element in data:
                 if element[0] == '.':
                         data.remove(element)
@@ -131,7 +126,6 @@ def defragmentation(data):
                 lastEnd = element[2]
         if ((lastEnd - 256) != 0):
                 data.append( [ '.' , lastEnd, 256] )
->>>>>>> f739677ffa5297cd06a2d2835c1e4afb6306d866
 
 if __name__ == "__main__":
 
@@ -144,16 +138,8 @@ if __name__ == "__main__":
 	processes = temp[0]
 	numProcess = temp[1]
         processes.sort(key=lambda x: x.start, reverse=False)
-<<<<<<< HEAD
-        for i in processes:
-                print(i)
-	
-		
+
 	data = [["A", 0, 45], [".", 45, 256] ]
 	printData(data)
 	data = mergeDots(data)
 	printData(data)
-=======
->>>>>>> f739677ffa5297cd06a2d2835c1e4afb6306d866
-
-        
