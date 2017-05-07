@@ -128,7 +128,7 @@ def contiguous(data, processes):
     worstFitc(data[:], processes[:])
 
 
-def nextFitnc(data, processes):
+def non_contiguous(data, processes):
     time = 0
     string = 'time '
     string += str(time)
@@ -137,9 +137,10 @@ def nextFitnc(data, processes):
     while((len(processes) > 0 or len(inMemory) > 0)):
         # will check for arrivals add them
         # to data and switch from process to inMem
-        checkReady(processes, data, inMemory, time)
-        checkDone(data, inMemory, time)
+        data = checkDone(data, inMemory, time)
+        data = checkReady(processes, data, inMemory, time)
         time += 1
+    print('time ' + str(time-1) + 'ms: Simulator ended (Non-contiguous)')
 
 
 def checkReady(processes, data, inMemory, time):
@@ -150,11 +151,19 @@ def checkReady(processes, data, inMemory, time):
             print('time ' + str(time) + 'ms: Process ' + processes[i].name
                   + ' arrived (requires ' + str(processes[i].numMem)
                   + ' frames)')
-            inMemory.append(processes[i])
+            if(freeSpace(data) >= processes[i].numMem):
+                data = nonContiguousAdd(data, processes[i], time)
+                inMemory.append(processes[i])
+            else:
+                print('time ' + str(time) + 'ms: Cannot place process '
+                      + processes[i].name + ' -- skipped!')
+
+            printData(data)
             processes.remove(processes[i])
             end -= 1
         else:
             i += 1
+    return data
 
 
 def checkDone(data, inMemory, time):
@@ -163,15 +172,44 @@ def checkDone(data, inMemory, time):
     while(i < end):
         if((inMemory[i].start + inMemory[i].stop) == time):
             print('time ' + str(time) + 'ms: Process '
-                  + str(inMemory[i].numMem) + ' removed:')
+                  + inMemory[i].name + ' removed:')
+            data = deleteProcess(data, inMemory[i].name)
             inMemory.remove(inMemory[i])
             end -= 1
         else:
             i += 1
+    return data
 
 
-def non_contiguous(data, processes):
-    nextFitnc(data[:], processes[:])
+def nonContiguousAdd(data, process, time):
+    i = 0
+    left = process.numMem
+    while(left):
+        if(data[i][0] == '.'):
+            sizeBlock = data[i][2] - data[i][1]
+            if(sizeBlock > left):
+                data = data[:i] + [[process.name, data[i][1], data[i][1]
+                                    + left]] + data[i:]
+                data[i+1][1] = data[i][2]
+                left = 0
+            else:
+                data[i][0] = process.name
+                left -= sizeBlock
+        i += 1
+    print('time ' + str(time) + 'ms: Placed process ' + process.name + ':')
+    return data
+
+
+def deleteProcess(data, name):
+    i = 0
+    end = len(data)
+    while(i < end):
+        if(data[i][0] == name):
+            data[i][0] = '.'
+        i += 1
+    mergeEverything(data)
+    printData(data)
+    return data
 
 
 def defragmentation(data):
@@ -190,21 +228,20 @@ def defragmentation(data):
 
 
 def mergeEverything(data):
-        i = 0
-        end = len(data)
-        while((i+1 != end)):
-            if(data[i][0] == data[i+1][0]):
-                data[i][2] = data[i+1][2]
-                data.remove(data[i+1])
-                end -= 1
-            else:
-                i += 1
+    i = 0
+    end = len(data)
+    while((i+1 != end)):
+        if(data[i][0] == data[i+1][0]):
+            data[i][2] = data[i+1][2]
+            data.remove(data[i+1])
+            end -= 1
+        else:
+            i += 1
 
 
 if __name__ == "__main__":
-    print('Init Data')
+
     data = initData()
-    printData(data)
     fileName = sys.argv[1]
     temp = parseFile(fileName)
     processes = temp[0]
@@ -214,12 +251,10 @@ if __name__ == "__main__":
     '''
     contiguous(data, processes)
     '''
-    for i in processes:
-        print(i)
     '''
     data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
     '''
-    non_contiguous(data, processes)
+    non_contiguous(data[:], processes[:])
     '''
     data = [["A", 0, 45], [".", 45, 256] ]
     printData(data)
