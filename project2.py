@@ -1,3 +1,5 @@
+''' Group Members: Austin Egri, Sumit Munshi And Carlos Calero '''
+
 from __future__ import print_function
 import sys
 from Process import *
