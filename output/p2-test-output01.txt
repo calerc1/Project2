@@ -96,16 +96,6 @@ EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
 ================================
 time 435ms: Process G arrived (requires 13 frames)
 time 435ms: Cannot place process G -- skipped!
-================================
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAABBBBBBBBBBBBBBBBBBB
-BBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDEEEEEEE
-EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
-================================
 time 450ms: Process A removed:
 ================================
 ................................
@@ -376,16 +366,6 @@ EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
 ================================
 time 435ms: Process G arrived (requires 13 frames)
 time 435ms: Cannot place process G -- skipped!
-================================
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAABBBBBBBBBBBBBBBBBBB
-BBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDEEEEEEE
-EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
-================================
 time 450ms: Process A removed:
 ================================
 ................................
@@ -656,16 +636,6 @@ EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
 ================================
 time 435ms: Process G arrived (requires 13 frames)
 time 435ms: Cannot place process G -- skipped!
-================================
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAABBBBBBBBBBBBBBBBBBB
-BBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDEEEEEEE
-EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
-================================
 time 450ms: Process A removed:
 ================================
 ................................
@@ -936,16 +906,6 @@ EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
 ================================
 time 435ms: Process G arrived (requires 13 frames)
 time 435ms: Cannot place process G -- skipped!
-================================
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAABBBBBBBBBBBBBBBBBBB
-BBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCC
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-CCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-DDDDDDDDDDDDDDDDDDDDDDDDDEEEEEEE
-EEEEEEEFFFFFFFFFFFFFFFFFFFFFFFF.
-================================
 time 450ms: Process A removed:
 ================================
 ................................
