@@ -1,14 +1,6 @@
 from __future__ import print_function
 import sys
 from Process import Process
-'''
-import sys
-sys.argv = "x p2-test-input03.txt".split(" ")
-# p2-test-input01.txt
-# p2-test-input02.txt
-# p2-test-input03.txt
-
-'''
 
 
 def initData():
@@ -18,15 +10,10 @@ def initData():
 
 
 def printData(data):
-    # height = 8
-    # length = 32
     print ("=" * 32)
     s = ""
     count = 0
     loc = 0
-    # line = 1
-    # nl_count = 0
-    # start = 0
     for element in data:
         count = 0
         while (count < (element[2] - element[1])):
@@ -61,71 +48,12 @@ def parseFile(filename):
     return [process, num]
 
 
-def find_dot_loc(data):
-    loc = []
-    for i in range(len(data)):
-        if data[i][0] == ".":
-                loc.append(i)
-    return loc
-
-
 def freeSpace(data):
         space = 0
         for element in data:
                 if element[0] == '.':
                         space += (element[2] - element[1])
         return space
-
-
-def nextFitc(data, processes):
-    print("Start nextfit")
-    printData(data)
-    for el in processes:
-        print(el)
-    i = 0
-    # isempty = True
-    while len(processes) > 0 and i <= 100:
-        # printData(data)
-        # if Process leaves at time i
-        # if Process arrives at time i
-        if(processes[0].start == i):
-            print("TRIGGERED", i, processes[0].numMem)
-            length = processes[0].numMem
-            dots = find_dot_loc(data)
-            print(dots)
-            if(len(dots) > 0):
-                for x in dots:
-                    dstart = data[x][1]
-                    dend = data[x][2]
-                    dlength = data[x][2] - data[x][1]
-                    print(dlength, length)
-                    print (dlength > length)
-                    if dlength >= length:
-                        print("here")
-                        data.insert(x, [processes[0].name, dstart, dstart
-                                    + length])
-                        data.pop(x+1)
-                        printData(data)
-                        if length < dlength:
-                            data.insert(x+1, [".", dstart + length, dend])
-                        printData(data)
-            else:
-                    pass  # unable to place process
-        i += 1
-
-
-def bestFitc(data, processes):
-    pass
-
-
-def worstFitc(data, processes):
-    pass
-
-
-def contiguous(data, processes):
-    nextFitc(data[:], processes[:])
-    bestFitc(data[:], processes[:])
-    worstFitc(data[:], processes[:])
 
 
 def non_contiguous(data, processes):
@@ -213,18 +141,23 @@ def deleteProcess(data, name):
 
 
 def defragmentation(data):
-    data = [['A', 0, 45], ['.', 45, 64], ['B', 64, 256]]
     for element in data:
         if element[0] == '.':
             data.remove(element)
     lastEnd = 0
+    moved = []
+    wait = 0
     for element in data:
-        len = element[2] - element[1]
+        Len = element[2] - element[1]
+        if(lastEnd != element[1]):
+            moved.append(element[0])
+            wait += Len
         element[1] = lastEnd
-        element[2] = element[1] + len
+        element[2] = element[1] + Len
         lastEnd = element[2]
     if ((lastEnd - 256) != 0):
         data.append(['.', lastEnd, 256])
+    return [ wait, moved]
 
 
 def mergeEverything(data):
@@ -248,46 +181,5 @@ if __name__ == "__main__":
     numProcess = temp[1]
     processes.sort(key=lambda x: x.start, reverse=False)
 
-    '''
-    contiguous(data, processes)
-    '''
-    '''
-    data = [["A", 2, 45], [".", 45, 75], ["B", 75, 100], [".", 100, 256] ]
-    '''
+   
     non_contiguous(data[:], processes[:])
-    '''
-    data = [["A", 0, 45], [".", 45, 256] ]
-    printData(data)
-    print( "Go\n", mergeDots(data) )
-    printData(data)
-    '''
-
-    # mergeeverything test
-    '''
-    data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80],
-    ['B',80, 256] ]
-    printData(data)
-    print (data)
-    mergeEverything(data)
-    printData(data)
-    '''
-
-    # freeSpace test
-    '''
-    print(freeSpace(data))
-    data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80],
-    ['B',80, 256] ]
-    mergeEverything(data)
-    print(freeSpace(data))
-    '''
-
-    # defragmentation test
-    '''
-    data = [ ['A', 0, 20], ['.',20,40], ['.',40,60], ['B',60,80],
-    ['B',80, 256] ]
-    mergeEverything(data)
-
-    printData(data)
-    defragmentation(data)
-    printData(data)
-    '''
