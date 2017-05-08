@@ -3,7 +3,7 @@ class Process:
         self.name = Name
         self.numMem = int(NumMem)
         self.start = int(Data[0])
-        self.stop = int(Data[1])
+        self.stop = int(Data[1]) + self.start
 
     def __str__(self):
         return self.name + " " + str(self.numMem) + " " + str(self.start)

@@ -98,7 +98,7 @@ def checkDone(data, inMemory, time):
     i = 0
     end = len(inMemory)
     while(i < end):
-        if((inMemory[i].start + inMemory[i].stop) == time):
+        if((inMemory[i].stop) == time):
             print('time ' + str(time) + 'ms: Process '
                   + inMemory[i].name + ' removed:')
             data = deleteProcess(data, inMemory[i].name)
